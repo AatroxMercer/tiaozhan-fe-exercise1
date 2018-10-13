@@ -4,17 +4,14 @@ var whacAMole = new Vue({
     count: 0,
     rank: 0,
     moleStatus: [false, false, false, false, false, false, false, false, false, false],
-    gameProcess: null
-  },
-  created: function() {
-    alert("Welcome to play Whac-a-Mole!");
-  },
-  mounted: function() {
-    this.gameRuning();
+    gameProcess: null,
+    gameOver: false
   },
   methods: {
     whac: function(event) {
-      // alert(event.target.id);
+      if (this.gameOver) {
+        return;
+      }
       var index = event.target.id;
       if (this.moleStatus[index]) {
         this.rank++;
@@ -22,25 +19,33 @@ var whacAMole = new Vue({
         Vue.set(this.moleStatus, index, false);
       }
     },
-    gameRuning: function() {
-      let _this = this;
-      this.gameProcess = setTimeout(() => {
-        let nextMole;
-        while (true) {
-          nextMole = parseInt(Math.random() * 9) + 1;
-          console.log(nextMole);
-          if (!this.moleStatus[nextMole]) {
-            Vue.set(this.moleStatus, nextMole, true);
-            this.count++;
-            if (this.count > 6) {
-              alert("Game Over!\nYou whac " + this.rank + " moles");
-              Window.clearTimeout(this.gameProcess);
-            }
-            break;
-          }
+    gameStart: function() {
+      for (let i in this.moleStatus) {
+        this.moleStatus[i] = false;
+      }
+      this.count = 0;
+      this.rank = 0;
+      this.gameOver = false;
+      this.gameProcess = setInterval(this.render, 300);
+    },
+    render: function() {
+      let nextMole = this.getNextMole();
+      Vue.set(this.moleStatus, nextMole, true);
+      this.count++;
+      if (this.count >= 6) {
+        this.gameOver = true;
+        window.clearInterval(this.gameProcess);
+        this.gameProcess = null;
+        alert(`Game Over! You have whaced ${this.rank} moles`);
+      }
+    },
+    getNextMole: function() {
+      while (true) {
+        let nextMole = parseInt(Math.random() * 9) + 1;
+        if (!this.moleStatus[nextMole]) {
+          return nextMole;
         }
-        this.gameRuning();
-      }, 300);
+      }
     }
   }
 });
