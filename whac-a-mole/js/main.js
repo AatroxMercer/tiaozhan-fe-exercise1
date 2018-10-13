@@ -7,6 +7,9 @@ var whacAMole = new Vue({
     gameProcess: null,
     gameOver: false
   },
+  mounted: function() {
+
+  },
   methods: {
     whac: function(event) {
       if (this.gameOver) {

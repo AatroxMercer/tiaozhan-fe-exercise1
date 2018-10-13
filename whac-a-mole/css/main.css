@@ -27,7 +27,6 @@
   cursor: pointer;
   background-image: url(./../img/bg.png);
   background-size: cover;
-  transition: background-image 0.5s;  -webkit-transition: background-image 0.5s;
 }
 
 .mole-coming {
