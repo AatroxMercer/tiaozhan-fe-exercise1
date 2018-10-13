@@ -1,0 +1,43 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+#game-container {
+  width: 100%;
+  height: 100%;
+  margin-top: 10vh;
+}
+
+.game-map {
+  width: 75vh;
+  height: 75vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.game-mole {
+  display: inline-block;
+  box-sizing: content-box;
+  width: 33%; height: 33%;
+  border-style: dashed;
+  border-color: gray;
+  border-width: 1px;
+  cursor: pointer;
+  background-image: url(./../img/bg.png);
+  background-size: cover;
+  transition: background-image 0.5s;  -webkit-transition: background-image 0.5s;
+}
+
+/* .game-mole:hover {
+  background-image: url(./../img/mole.png);
+  background-color: #883d0b;
+} */
+
+.mole-coming {
+  background-image: url(./../img/mole.png);
+  background-color: #883d0b;
+}
