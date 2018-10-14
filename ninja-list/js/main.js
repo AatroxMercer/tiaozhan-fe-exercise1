@@ -12,16 +12,27 @@ var ninjaList = new Vue({
     }
   },
   methods: {
+    createNinja(ninja) {
+      let temp = {};
+      temp.id = ninja.id;
+      temp.name = ninja.name;
+      temp.skills = ninja.skills;
+      return temp;
+    },
+    sortNinja: function(left, right) {
+      return left.id - right.id;
+    },
     addNinja: function() {
       this.count++;
       console.log(this.newNinja);
-      this.ninjas.push(this.newNinja);
+      this.ninjas.push((this.createNinja(this.newNinja)));
+      this.ninjas.sort(this.sortNinja);
     },
     deleteNinja: function() {
       let index = this.searchNinja(this.deadNinja);
       console.log(index);
       if (index >= 0) {
-        this.ninjas.splice(index);
+        this.ninjas.splice(index, index);
       } else {
         this.deadNinja = null;
         alert("404 not found");
