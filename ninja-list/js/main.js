@@ -33,6 +33,7 @@ var ninjaList = new Vue({
       console.log(index);
       if (index >= 0) {
         this.ninjas.splice(index, index);
+        this.count--;
       } else {
         this.deadNinja = null;
         alert("404 not found");

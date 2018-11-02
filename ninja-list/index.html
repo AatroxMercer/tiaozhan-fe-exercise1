@@ -15,7 +15,7 @@
       <p v-show="isEmpty">Add Ninjas please.</p>
       <p v-show="!isEmpty">There are {{count}} ninjas.</p>
       <li v-for="ninja in ninjas">
-        {{ninja.name}}:{{ninja.id}},{{ninja.skills}}
+        {{ninja.id}}:{{ninja.name}}{{" "}}会{{" "}}{{ninja.skills}}
       </li>
     </ul>
     <div>
