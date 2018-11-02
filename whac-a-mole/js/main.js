@@ -5,13 +5,13 @@ var whacAMole = new Vue({
     rank: 0,
     moleStatus: [false, false, false, false, false, false, false, false, false, false],
     gameProcess: null,
-    gameOver: false
-  },
-  mounted: function() {
-
+    gameOver: false,
+    gameSpeed: 300
   },
   methods: {
     whac: function(event) {
+      this.$refs.hit.pause();
+      this.$refs.hit.play();
       if (this.gameOver) {
         return;
       }
@@ -29,17 +29,18 @@ var whacAMole = new Vue({
       this.count = 0;
       this.rank = 0;
       this.gameOver = false;
-      this.gameProcess = setInterval(this.render, 300);
+      setTimeout(this.render, this.gameSpeed);
     },
     render: function() {
       let nextMole = this.getNextMole();
-      Vue.set(this.moleStatus, nextMole, true);
       this.count++;
       if (this.count >= 6) {
         this.gameOver = true;
-        window.clearInterval(this.gameProcess);
-        this.gameProcess = null;
         alert(`Game Over! You have whaced ${this.rank} moles`);
+      }
+      if (!this.gameOver) {
+        Vue.set(this.moleStatus, nextMole, true);
+        setTimeout(this.render, this.gameSpeed);
       }
     },
     getNextMole: function() {

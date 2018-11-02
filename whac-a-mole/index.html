@@ -11,10 +11,11 @@
 </head>
 <body>
   <main id="game-container">
+    <audio src="./audio/hit.wav" ref="hit"></audio>
     <div class="start-action-container">
       <h1 class="title">Welcome to play Whac-a-Mole!</h1>
       <a v-show="gameProcess === null" class="button" @click="gameStart">Start Game</a>
-      <p v-show="gameProcess !== null">You whac {{ rank }} moles</p>
+      <p v-show="gameProcess !== null" class="count">You whac {{ rank }} moles</p>
     </div>
     <div class="game-map">
       <div class="game-mole"
