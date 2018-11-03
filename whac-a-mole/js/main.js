@@ -29,6 +29,7 @@ var whacAMole = new Vue({
       this.count = 0;
       this.rank = 0;
       this.gameOver = false;
+      this.gameSpeed = 300;
       setTimeout(this.render, this.gameSpeed);
     },
     render: function() {
@@ -40,6 +41,9 @@ var whacAMole = new Vue({
       }
       if (!this.gameOver) {
         Vue.set(this.moleStatus, nextMole, true);
+        if (this.gameSpeed >= 250) {
+          this.gameSpeed--;
+        }
         setTimeout(this.render, this.gameSpeed);
       }
     },
